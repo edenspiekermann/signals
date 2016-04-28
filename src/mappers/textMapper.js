@@ -16,7 +16,17 @@ class TextMapper extends BaseMapper {
 
   map() {
     const mapping = this.mapTones(this.sortedUniqueCharacters());
-    return this.characters().map(char => Teoria.note(mapping[char]).midi());
+    var tones = [];
+
+    this.characters().forEach(char => {
+      if (char.match(/[\.\?\!]+/)) {
+        tones.push(-1);
+      } else {
+        tones.push(Teoria.note(mapping[char]).midi());
+      }
+    });
+
+    return tones;
   }
 
   mapTones(chars) {
