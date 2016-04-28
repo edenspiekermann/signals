@@ -1,6 +1,5 @@
-import {Person} from './model/Person';
+import Player from './player';
 
 global.app = function () {
-    var christoph = new Person('Christoph', 'Burgdorf');
-    console.log(christoph.fullName);
+  new Player('acoustic_grand_piano', 'tbd').start();
 };
