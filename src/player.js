@@ -1,18 +1,18 @@
 import Teoria from 'teoria';
 import TextMapper from './mappers/textMapper';
 
-var _generateNotes = (key) => {
-  var scales = ['major', 'minor', 'ionian', 'dorian', 'phrygian', 'lydian', 'mixolydian'];
-
-  var mix = Teoria
-    .note(key)
-    .scale('phrygian')
-    .simple()
-
-  return mix.map((note) => {
-    return Teoria.note(note).midi();
-  });
-}
+// var _generateNotes = (key) => {
+//   var scales = ['major', 'minor', 'ionian', 'dorian', 'phrygian', 'lydian', 'mixolydian'];
+//
+//   var mix = Teoria
+//     .note(key)
+//     .scale('phrygian')
+//     .simple()
+//
+//   return mix.map((note) => {
+//     return Teoria.note(note).midi();
+//   });
+// }
 
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -34,6 +34,24 @@ class Player {
         console.log(state, progress);
       },
       onsuccess: function() {
+        MIDI.setEffects([{
+          type: "Delay",
+          feedback: 0.6, // 0 to 1+
+          delayTime: 500, // how many milliseconds should the wet signal be delayed?
+          wetLevel: 0.76, // 0 to 1+
+          dryLevel: 1, // 0 to 1+
+          cutoff: 20, // cutoff frequency of the built in highpass-filter. 20 to 22050
+          bypass: 0
+        },
+        {
+          type: "Phaser",
+          rate: 4, // 0.01 to 8 is a decent range, but higher values are possible
+          depth: 0.7, // 0 to 1
+          feedback: 0.5, // 0 to 1+
+          stereoPhase: 100, // 0 to 180
+          baseModulationFrequency: 700, // 500 to 1500
+          bypass: 0
+        }]);
         const notes = $this.loadNotesFromContent();
         $this.playNotes(notes);
       }
@@ -45,7 +63,7 @@ class Player {
   }
 
   playNotes(notes) {
-    var delay = 0; // play one note every quarter second
+    var delay = 2; // play one note every quarter second
     var velocity = 127; // how hard the note hits
     MIDI.setVolume(0, 127);
 
@@ -54,8 +72,15 @@ class Player {
     // play the notes
     setInterval(() => {
       MIDI.noteOn(0, notes[index], velocity);
+      MIDI.noteOff(0, notes[index], delay);
+
+      if (index % 4 === 0) {
+        MIDI.chordOn(0, [notes[index], notes[index + 2], notes[index + 4]], 50);
+        MIDI.chordOff(0, [notes[0], notes[2], notes[4]], delay);
+      }
+
       index = index > notes.length ? 0 : index + 1
-    }, 200);
+    }, 400);
   }
 }
 

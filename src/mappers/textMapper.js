@@ -11,12 +11,13 @@ class TextMapper extends BaseMapper {
     super();
 
     this.text = text;
+  }
 
-    const scaleType = 'dorian';//this.scales[this.getRandomInt(0, this.scales.length)];
-    const key = 'g';
-    const basicScale = Teoria.note(key).scale(scaleType).simple();
+  createNotes(key, scale) {
+    const basicScale = Teoria.note(key).scale(scale).simple();
+    const thirds = [basicScale[0], basicScale[2], basicScale[3], basicScale[4]];
 
-    this.scale = basicScale
+    return thirds
       .concat(basicScale.map(note => `${note}'`))
       .concat(basicScale.map(note => `${note}''`))
       .concat(basicScale.map(note => `${note}'''`))
@@ -44,9 +45,18 @@ class TextMapper extends BaseMapper {
   }
 
   mapTones(chars) {
+    var keys = ['a', 'b', 'c', 'd', 'e', 'f', 'g'];
+    var keyIndex = this.getRandomInt(0, keys.length - 1);
+    var scaleIndex = this.getRandomInt(0, this.scales.length - 1);
+    console.log(keys[keyIndex], this.scales[scaleIndex]);
+    var scale = this.createNotes(keys[keyIndex], this.scales[scaleIndex]);
+
     return (
       chars.reduce((mapping, char, index) => {
-        mapping[char] = this.scale[index % this.scale.length];
+        // var songKey = Teoria.note(keys[0])
+        // var randomKey = index % 4 === 0 ? keys[0] : keys[this.getRandomInt(0, (keys.length - 1))];
+        // var randomScale = index % 4 === 0 ? this.scales[2]this.scales[this.getRandomInt(0, (this.scales.length - 1))];
+        mapping[char] = scale[index % scale.length];
         return mapping;
       }, {})
     );

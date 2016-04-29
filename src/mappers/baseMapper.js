@@ -8,19 +8,11 @@ class BaseMapper {
       'major',
       'minor',
       'dorian',
-      'phrygian',
-      'lydian',
       'mixolydian',
       'locrian',
       'majorpentatonic',
       'minorpentatonic',
-      'chromatic',
-      'blues',
-      'doubleharmonic',
-      'flamenco',
-      'harmonicminor',
-      'melodicminor',
-      'wholetone'
+      'melodicminor'
     ];
   }
 
