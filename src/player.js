@@ -63,8 +63,9 @@ class Player {
   }
 
   playNotes(notes) {
-    var delay = 2; // play one note every quarter second
-    var velocity = 127; // how hard the note hits
+    const delay = 2; // play one note every quarter second
+    const velocity = 127; // how hard the note hits
+    const speed = this.getSpeed(notes);
     MIDI.setVolume(0, 127);
 
     var index = 0;
@@ -80,7 +81,19 @@ class Player {
       }
 
       index = index > notes.length ? 0 : index + 1
-    }, 400);
+    }, speed);
+  }
+
+  getSpeed(notes) {
+    const maxSpeed = 340; // bpm
+    const minSpeed = 120;
+    const length = notes.length;
+    var speed = (60 * 1000) / (Math.log2(length) * Math.log2(length) * 2);
+
+    speed = Math.min(speed, (60 * 1000) / minSpeed);
+    speed = Math.max(speed, (60 * 1000) / maxSpeed);
+    console.log(speed);
+    return speed;
   }
 }
 
