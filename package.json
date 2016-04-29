@@ -16,6 +16,7 @@
     "browserify": "^6.3.3",
     "gulp": "~3.8.10",
     "gulp-rename": "^1.2.0",
+    "jimp": "^0.2.24",
     "lodash": "^2.4.1",
     "rimraf": "~2.2.8",
     "teoria": "^2.2.0",

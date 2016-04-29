@@ -47,7 +47,6 @@ gulp.task('build', ['build-persistent'], function() {
 });
 
 gulp.task('watch', ['build-persistent'], function() {
-
   browserSync({
     server: {
       baseDir: './'
