@@ -1,4 +1,5 @@
-var Teoria = require('teoria');
+import Teoria from 'teoria';
+import TextMapper from './mappers/textMapper';
 
 var _generateNotes = (key) => {
   var scales = ['major', 'minor', 'ionian', 'dorian', 'phrygian', 'lydian', 'mixolydian'];
@@ -25,7 +26,6 @@ class Player {
 
   start() {
     const $this = this;
-    var notes = _generateNotes('g');
 
     MIDI.loadPlugin({
       soundfontUrl: "./vendor/soundfont/",
@@ -34,14 +34,14 @@ class Player {
         console.log(state, progress);
       },
       onsuccess: function() {
-        //const content = $this.loadNotesFromContent();
+        const notes = $this.loadNotesFromContent();
         $this.playNotes(notes);
       }
     });
   }
 
   loadNotesFromContent() {
-    return [Teoria.note('a4').midi(), Teoria.note('c4').midi()];
+    return new TextMapper(this.content).map();
   }
 
   playNotes(notes) {
@@ -49,11 +49,13 @@ class Player {
     var velocity = 127; // how hard the note hits
     MIDI.setVolume(0, 127);
 
+    var index = 0;
+
     // play the notes
     setInterval(() => {
-      var index = getRandomInt(0, notes.length + 1);
       MIDI.noteOn(0, notes[index], velocity);
-    }, 1000);
+      index = index > notes.length ? 0 : index + 1
+    }, 200);
   }
 }
 
