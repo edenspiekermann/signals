@@ -1552,7 +1552,6 @@ var TextMapper = function (_BaseMapper) {
       var keys = ['a', 'b', 'c', 'd', 'e', 'f', 'g'];
       var keyIndex = this.getRandomInt(0, keys.length - 1);
       var scaleIndex = this.getRandomInt(0, this.scales.length - 1);
-      console.log(keys[keyIndex], this.scales[scaleIndex]);
       var scale = this.createNotes(keys[keyIndex], this.scales[scaleIndex]);
 
       return chars.reduce(function (mapping, char, index) {
@@ -1653,10 +1652,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 //   });
 // }
 
-function getRandomInt(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
 var Player = function () {
   function Player(instrument, content) {
     _classCallCheck(this, Player);
@@ -1737,7 +1732,7 @@ var Player = function () {
 
       speed = Math.min(speed, 60 * 1000 / minSpeed);
       speed = Math.max(speed, 60 * 1000 / maxSpeed);
-      console.log(speed);
+
       return speed;
     }
   }]);
