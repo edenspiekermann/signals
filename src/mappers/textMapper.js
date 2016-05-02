@@ -48,7 +48,6 @@ class TextMapper extends BaseMapper {
     var keys = ['a', 'b', 'c', 'd', 'e', 'f', 'g'];
     var keyIndex = this.getRandomInt(0, keys.length - 1);
     var scaleIndex = this.getRandomInt(0, this.scales.length - 1);
-    console.log(keys[keyIndex], this.scales[scaleIndex]);
     var scale = this.createNotes(keys[keyIndex], this.scales[scaleIndex]);
 
     return (

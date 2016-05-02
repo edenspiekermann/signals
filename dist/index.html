@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./styles.css">
+    <title>Signals — Edenspiekermann</title>
+  </head>
+  <body>
+    <main class="main">
+      <noscript>
+        Sorry! This page requires JavaScript to perform correctly.
+      </noscript>
+
+      <h1 class="main-title">Signals</h1>
+      <p>Signals is a small application to convert text into music. Try writing something, or even copying and pasting a whole file into the textarea below. Then turn your speakers up and enjoy the music!</p>
+
+      <textarea class="textarea" id="content-input"></textarea>
+      <button id="content-submit" class="button" type="button">Play content</button>
+
+      <img id="img-preview" />
+
+      <footer class="footer" role="contentinfo">
+        <p>&copy;&nbsp;Signals has been made by Anthony Stirton and Paul Götze at <a href="http://edenspiekermann.com">Edenspiekermann</a> as part of ESPI Maker Days 2016.</p>
+      </footer>
+    </main>
+
+    <script src="./vendor.js"></script>
+    <script src="./bundle.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        app && app();
+      })
+    </script>
+  </body>
+</html>

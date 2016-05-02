@@ -8,8 +8,6 @@ class ImageMapper extends BaseMapper {
     super();
     this.image = imageUrl;
 
-    console.log(imageUrl);
-
     const scaleType = 'dorian';
     const key = 'a';
     const basicScale = Teoria.note(key).scale(scaleType).simple();

@@ -14,10 +14,6 @@ import TextMapper from './mappers/textMapper';
 //   });
 // }
 
-function getRandomInt(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
 class Player {
   constructor(instrument, content) {
     this.instrument = instrument;
@@ -92,7 +88,7 @@ class Player {
 
     speed = Math.min(speed, (60 * 1000) / minSpeed);
     speed = Math.max(speed, (60 * 1000) / maxSpeed);
-    console.log(speed);
+
     return speed;
   }
 }
