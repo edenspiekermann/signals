@@ -1,10 +1,9 @@
 {
   "scripts": {
-    "clean": "rm -f dist/bundle.js && rm -f dist/vendor.js && rm -rf dist/vendor/soundfont",
+    "clean": "rm -f dist/bundle.js && rm -f dist/vendor.js",
     "main": "browserify src/app.js -o dist/bundle.js -t [ babelify --presets [ es2015 ] ]",
-    "vendor": "cat vendor/midi.min.js vendor/inc/shim/Base64.js vendor/inc/shim/Base64binary.js vendor/inc/shim/WebAudioAPI.js vendor/inc/tuna/tuna.js vendor/midi/audioDetect.js vendor/midi/gm.js vendor/midi/loader.js vendor/midi/plugin.audiotag.js vendor/midi/plugin.webaudio.js vendor/midi/plugin.webmidi.js vendor/util/dom_request_xhr.js vendor/util/dom_request_script.js > dist/vendor.js",
-    "sound": "mkdir dist/vendor && cp -r vendor/soundfont dist/vendor",
-    "dist" : "npm run main && npm run sound && npm run vendor",
+    "vendor": "cat dist/vendor/midi.min.js dist/vendor/inc/shim/Base64.js dist/vendor/inc/shim/Base64binary.js dist/vendor/inc/shim/WebAudioAPI.js dist/vendor/inc/tuna/tuna.js dist/vendor/midi/audioDetect.js dist/vendor/midi/gm.js dist/vendor/midi/loader.js dist/vendor/midi/plugin.audiotag.js dist/vendor/midi/plugin.webaudio.js dist/vendor/midi/plugin.webmidi.js dist/vendor/util/dom_request_xhr.js dist/vendor/util/dom_request_script.js > dist/vendor.js",
+    "dist" : "npm run main && npm run vendor",
     "predeploy": "npm run dist",
     "deploy": "git subtree push --prefix dist origin gh-pages"
   },
